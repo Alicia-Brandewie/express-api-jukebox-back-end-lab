@@ -9,6 +9,7 @@ const morgan = require("morgan");
 
 const logger = require('morgan');
 const cors = require('cors');
+const trackRouter = require('./controllers/tracks')
 
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -22,6 +23,7 @@ app.use(logger('dev'));
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
+app.use('/tracks', trackRouter);
 
 // Routes go here
 
