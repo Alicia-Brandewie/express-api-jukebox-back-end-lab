@@ -20,15 +20,13 @@ router.get('/', async (req, res) => {
     try {
         const indexTracks = await Track.find();
         res.status(200).json(indexTracks);
-
     } catch (err) {
         res.status(500).json({ err: err.message });
     }
 });
 
+
 // GET - SHOW - /tracks/:id
-
-
 router.get('/:Id', async (req, res) => {
     try {
         const showTrack = await Track.findById(req.params.Id);
@@ -59,7 +57,7 @@ router.put('/:Id', async (req, res) => {
         });
         if (!updatedTrack) {
             res.status(404);
-            throw new Error('Track not found'.);
+            throw new Error('Track not found.');
         }
     } catch (eer) {
         if (res.statusCode === 404) {
@@ -78,7 +76,15 @@ router.put('/:Id', async (req, res) => {
 //////NEEDS TO BE TESTED//////
 router.delete('/:Id', async (req, res) => {
     try {
-        throw new Error('this is a test error');
+        const deletedTrack = await Track.findByIdAndDelete(req.params.Id);
+
+        if (!deletedTrack) {
+            res.status(404)
+            throw new Error('Track not found.');
+        }
+
+        res.status(200).json(deletedTrack);
+
 
     } catch (err) {
         if (res.statusCode === 404) {
@@ -88,6 +94,8 @@ router.delete('/:Id', async (req, res) => {
         }
     }
 })
+
+module.exports = router;
 
 
 
