@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const trackSchema = mongoose.Schema({
     title: {
-        type: String, 
+        type: String,
         required: true,
     },
     artist: {
-        type: String, 
+        type: String,
         required: true,
     },
 });
