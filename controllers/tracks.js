@@ -51,6 +51,7 @@ router.put('/:Id', async (req, res) => {
             res.status(404);
             throw new Error('Track not found.');
         }
+        res.status(200).json(updatedTrack);
     } catch (eer) {
         if (res.statusCode === 404) {
             res.json({ err: err.message });
